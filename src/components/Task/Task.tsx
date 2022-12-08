@@ -1,13 +1,17 @@
 import "./Task.css"
 
-export default function Task () {
+type taskProps = {
+  task: string
+  removeTask: (task:string)=>void
+}
 
+export default function Task ({task, removeTask}: taskProps) {
   return (
     <div className="task">
       <p>
-        Aqui vai o que está escrito na tarefa
+        {task}
       </p>
-      <div className="delete">
+      <div className="delete" onClick={()=>removeTask(task)}>
         X
       </div>
     </div>

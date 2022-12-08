@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import "./Input.css"
 
-export default function Input () {
+type InputProps = {
+  tasks: string[],
+  setTasks: Dispatch<SetStateAction<string[]>>
+}
+
+export default function Input ({tasks, setTasks}: InputProps) {
 
   const [newTask, setnewTask] = useState("");
+
+function insertTask (newTask: string) {
+  if(newTask){
+    setTasks([...tasks, newTask]);
+    setnewTask("");
+  }
+}
 
   return (
     <div  className="input">
@@ -14,7 +26,7 @@ export default function Input () {
         onChange={(e) => setnewTask(e.target.value)}
        required
       />
-      <div className="send">
+      <div className="send" onClick={()=>insertTask(newTask)}>
         Enviar
       </div>
     </div>
